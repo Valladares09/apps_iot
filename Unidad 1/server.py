@@ -19,14 +19,20 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         post_data = self.rfile.read(content_length)
 
         body_json = json.loads(post_data.decode())
-        print(body_json['action'])
+        print(body_json['quantity'])
+        
 
         global contador
 
-        if(body_json['action'] == 'asc'):
-            contador += 1
-        elif(body_json['action'] == 'desc'):
-            contador -= 1
+        if 'quantity' in body_json and 'amount' in body_json:
+            amount = int(body_json['amount'])
+
+            if body_json['quantity'] == 'asc':
+                contador += amount
+            elif body_json['quantity'] == 'desc':
+                contador -= amount
+            else:
+                print("Opción de cantidad no válida")
 
         # Print the complete HTTP request
         print("\n----- Incoming POST Request -----")
