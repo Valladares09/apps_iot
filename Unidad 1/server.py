@@ -20,7 +20,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 
         body_json = json.loads(post_data.decode())
         print(body_json['action'])
-        
+         
 
         global contador
 
